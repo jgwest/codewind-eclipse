@@ -146,6 +146,12 @@ else
   export PLATFORM="-$ARCH"
 fi
 
+# If using Msys2 on Windows, replace msys with windows
+UNAME_O=$(uname -o);
+if [ "$UNAME_O" = "Msys" ]; then
+  export HOST_OS=windows
+fi
+
 docker-compose -f $DOCKER_COMPOSE_FILE up -d;
 if [ $? -eq 0 ]; then
     # Reset so we don't get conflicts
